@@ -15,7 +15,6 @@
 ## 📋 Table of Contents
 - [✨ Features](#-features)
 - [🚀 Quick Start](#-quick-start)
-- [🖼️ Screenshots](#️-screenshots)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📁 Project Structure](#-project-structure)
 - [🎮 How to Use](#-how-to-use)
@@ -72,16 +71,6 @@ Open your browser and navigate to:
 
 text
 http://localhost:3000
-🖼️ Screenshots
-Desktop View	Mobile View
-https://via.placeholder.com/800x450/8A2BE2/FFFFFF?text=Desktop+View	https://via.placeholder.com/400x700/4169E1/FFFFFF?text=Mobile+View
-Interactive Demo: Try typing examples like:
-
-"My sister loves cycling and reading books"
-
-"Boyfriend who enjoys tech and gaming"
-
-"Mom who loves cooking and gardening"
 
 🛠️ Tech Stack
 Frontend Layer
