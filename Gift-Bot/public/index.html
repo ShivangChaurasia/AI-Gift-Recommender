@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="shortcut icon" href="/Asset/icon.png" type="image/png">
+  <link rel="shortcut icon" href="./Asset/icon.png" type="image/png">
 
   <link rel="icon" href="Asset/icon.png" type="image/png">
 
@@ -668,34 +668,70 @@
       const responseDiv = document.getElementById('response');
       const responseContainer = document.getElementById('responseContainer');
       const typingIndicator = document.getElementById('typingIndicator');
-      
+
       if (!input.trim()) {
-        responseDiv.innerHTML = '<div class="alert alert-warning">Please describe the person or occasion to get gift suggestions.</div>';
+        responseDiv.innerHTML =
+          '<div class="alert alert-warning">Please describe the person or occasion to get gift suggestions.</div>';
         responseContainer.style.display = 'block';
         return;
       }
-      
-      // Check for typos
+    
+      // Typo detection (KEEP this)
       const typoCheck = checkForTypos(input);
       if (typoCheck) {
         showTypoAlert(typoCheck.typo, typoCheck.correction);
       } else {
         hideTypoAlert();
       }
-      
-      // Show response container and typing indicator
+    
+      // UI state
       responseContainer.style.display = 'block';
       typingIndicator.style.display = 'block';
       responseDiv.innerHTML = '';
+    
+      try {
+        const res = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input })
+        });
       
-      // Simulate API call with better AI
-      setTimeout(() => {
+        const data = await res.json();
+      
         typingIndicator.style.display = 'none';
-        const giftSuggestions = generateImprovedGiftSuggestions(input);
-        responseDiv.innerHTML = giftSuggestions;
-        responseContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 1800);
+      
+        if (!data.reply) {
+          throw new Error("No reply from AI");
+        }
+      
+        // Display AI response
+        responseDiv.innerHTML = `
+          <div class="gift-category" style="border-left-color:#8A2BE2;">
+            <h5 style="color:#8A2BE2;">
+              <i class="fas fa-robot"></i> AI Gift Suggestions
+            </h5>
+            <div class="gift-item">
+              ${data.reply.replace(/\n/g, "<br/>")}
+            </div>
+          </div>
+        `;
+        
+        responseContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        
+      } catch (error) {
+        typingIndicator.style.display = 'none';
+        responseDiv.innerHTML = `
+          <div class="alert alert-warning mb-3">
+            <i class="fas fa-info-circle"></i>
+            AI service is currently unavailable. Showing smart local suggestions instead.
+          </div>
+          ${generateImprovedGiftSuggestions(input)}
+        `;
+
+        console.error(error);
+      }
     }
+
     
     // Improved function to generate gift suggestions
     function generateImprovedGiftSuggestions(input) {
