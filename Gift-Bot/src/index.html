@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gift Recommender AI</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="shortcut icon" href="/Asset/icon.png" type="image/png">
+
+  <link rel="icon" href="Asset/icon.png" type="image/png">
+
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #8A2BE2 0%, #4169E1 100%);
+      --secondary-gradient: linear-gradient(135deg, #FF6B8B 0%, #FFA726 100%);
+      --accent-gradient: linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%);
+      --dark-bg: #0a0e17;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --chat-bg: rgba(248, 249, 255, 0.9);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --glow-color: rgba(138, 43, 226, 0.2);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark-bg);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .container {
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Floating animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 5px 20px var(--glow-color); }
+      50% { box-shadow: 0 5px 30px rgba(138, 43, 226, 0.4); }
+    }
+    
+    .header-section {
+      text-align: center;
+      margin: 40px 0 30px;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .header-section h1 {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-section p {
+      color: #b0b7d6;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 25px;
+      font-weight: 300;
+    }
+    
+    .gift-icon-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+    
+    .gift-icon {
+      display: inline-block;
+      background: var(--secondary-gradient);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      line-height: 100px;
+      font-size: 3rem;
+      color: white;
+      box-shadow: 0 15px 35px rgba(255, 107, 139, 0.3);
+      animation: glow 3s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .gift-icon-ring {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 2px solid rgba(65, 105, 225, 0.3);
+      border-radius: 50%;
+      top: -10px;
+      left: -10px;
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .input-card {
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 20px 50px var(--shadow-color);
+      padding: 40px;
+      margin-bottom: 30px;
+      border: none;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .input-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-gradient);
+    }
+    
+    .input-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px var(--shadow-color);
+    }
+    
+    .input-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .input-icon {
+      background: var(--primary-gradient);
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 20px rgba(138, 43, 226, 0.2);
+    }
+    
+    .input-header h3 {
+      margin: 0;
+      font-weight: 700;
+      color: #333;
+      font-size: 1.8rem;
+    }
+    
+    #userInput {
+      border-radius: 15px;
+      padding: 22px;
+      font-size: 1.1rem;
+      border: 2px solid #e6e9ff;
+      transition: all 0.3s;
+      height: auto;
+      resize: none;
+      background: rgba(255, 255, 255, 0.9);
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    #userInput:focus {
+      border-color: #8A2BE2;
+      box-shadow: 0 0 0 0.3rem rgba(138, 43, 226, 0.15);
+      background: white;
+    }
+    
+    .btn-primary {
+      background: var(--primary-gradient);
+      border: none;
+      border-radius: 15px;
+      padding: 18px 45px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 25px;
+      width: 100%;
+      transition: all 0.3s;
+      box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
+    }
+    
+    .btn-primary:hover::after {
+      left: 100%;
+    }
+    
+    .response-card {
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 20px 50px var(--shadow-color);
+      padding: 40px;
+      margin-top: 30px;
+      display: none;
+      border-left: 5px solid #FF6B8B;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .response-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--accent-gradient);
+    }
+    
+    .response-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    
+    .response-icon {
+      background: var(--accent-gradient);
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 20px rgba(0, 201, 255, 0.2);
+    }
+    
+    .response-header h3 {
+      margin: 0;
+      font-weight: 700;
+      color: #333;
+      font-size: 1.8rem;
+    }
+    
+    #response {
+      min-height: 200px;
+      padding: 25px;
+      background-color: var(--chat-bg);
+      border-radius: 15px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #444;
+      white-space: pre-line;
+    }
+    
+    .gift-category {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 20px 0;
+      border-left: 5px solid;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+    
+    .gift-category:hover {
+      transform: translateX(5px);
+    }
+    
+    .gift-category h5 {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .gift-category h5 i {
+      margin-right: 10px;
+      font-size: 1.4rem;
+    }
+    
+    .gift-item {
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .gift-item:last-child {
+      border-bottom: none;
+    }
+    
+    .gift-item i {
+      color: #8A2BE2;
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .budget-tag {
+      display: inline-block;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+    }
+    
+    .examples {
+      margin-top: 40px;
+      padding: 35px;
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 20px 50px var(--shadow-color);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .examples h5 {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+    
+    .examples h5 i {
+      margin-right: 15px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .example-chip {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(65, 105, 225, 0.1));
+      padding: 12px 25px;
+      border-radius: 50px;
+      margin: 0 12px 12px 0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(138, 43, 226, 0.2);
+      color: #555;
+      font-weight: 500;
+    }
+    
+    .example-chip:hover {
+      background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(65, 105, 225, 0.2));
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(138, 43, 226, 0.15);
+      color: #8A2BE2;
+    }
+    
+    .typing-indicator {
+      display: none;
+      padding: 20px;
+      background-color: var(--chat-bg);
+      border-radius: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .typing-dots {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-gradient);
+      margin-right: 8px;
+      animation: typing 1.4s infinite ease-in-out both;
+    }
+    
+    .typing-dots:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+    
+    .typing-dots:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+    
+    @keyframes typing {
+      0%, 80%, 100% {
+        transform: scale(0.7);
+        opacity: 0.5;
+      }
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #b0b7d6;
+      font-size: 0.95rem;
+      padding: 20px;
+    }
+    
+    .footer a {
+      color: #8A2BE2;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Typo alert */
+    .typo-alert {
+      background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+      border-left: 5px solid #ff9800;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .header-section h1 {
+        font-size: 2.5rem;
+      }
+      
+      .input-card, .response-card, .examples {
+        padding: 25px;
+      }
+      
+      .example-chip {
+        display: block;
+        margin: 0 0 12px 0;
+      }
+      
+      .input-icon, .response-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+  
+  <div class="container mt-4">
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="gift-icon-container">
+        <div class="gift-icon-ring"></div>
+        <div class="gift-icon">
+          <i class="fas fa-gift"></i>
+        </div>
+      </div>
+      <h1>Gift Recommender AI</h1>
+      <p>Describe the person, occasion, or interests. Our AI analyzes keywords and suggests perfect gifts with smart typo detection.</p>
+    </div>
+    
+    <!-- Input Card -->
+    <div class="input-card">
+      <div class="input-header">
+        <div class="input-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <h3>Tell me about the person</h3>
+      </div>
+      
+      <div class="form-group">
+        <textarea 
+          id="userInput" 
+          class="form-control" 
+          placeholder="Example: 'My sister loves cycling, reading books, and trying new recipes. Birthday gift under $100?'" 
+          rows="4"></textarea>
+      </div>
+      
+      <!-- Typo Alert -->
+      <div class="typo-alert" id="typoAlert">
+        <i class="fas fa-exclamation-triangle"></i> 
+        <span id="typoMessage"></span>
+        <button class="btn btn-sm btn-outline-warning ml-2" id="correctTypo">Fix it</button>
+      </div>
+      
+      <button onclick="sendMessage()" class="btn btn-primary">
+        <i class="fas fa-magic"></i> Get Smart Recommendations
+      </button>
+    </div>
+    
+    <!-- Response Card -->
+    <div class="response-card" id="responseContainer">
+      <div class="response-header">
+        <div class="response-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3>AI Gift Suggestions</h3>
+      </div>
+      
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="typing-dots"></div>
+        <div class="typing-dots"></div>
+        <div class="typing-dots"></div>
+        <span class="ml-2">Analyzing interests and generating ideas...</span>
+      </div>
+      
+      <div id="response"></div>
+    </div>
+    
+    <!-- Example Suggestions -->
+    <div class="examples">
+      <h5><i class="fas fa-lightbulb"></i> Try these examples for better results:</h5>
+      <div>
+        <span class="example-chip" onclick="fillExample('My boyfriend is a tech enthusiast who loves video games and sci-fi movies. Our anniversary is coming up.')">💻 Tech enthusiast boyfriend</span>
+        <span class="example-chip" onclick="fillExample('My mom loves cooking Italian food, gardening, and drinking tea. Her birthday is next week.')">👩‍🍳 Mom who loves cooking</span>
+        <span class="example-chip" onclick="fillExample('My sister is into cycling, reading books, and yoga. Need birthday ideas under $80.')">🚴‍♀️ Sister who loves cycling</span>
+        <span class="example-chip" onclick="fillExample('My 10-year-old nephew is obsessed with dinosaurs, LEGO, and space exploration. Christmas gift ideas?')">🦕 10-year-old dinosaur fan</span>
+        <span class="example-chip" onclick="fillExample('A friend who loves hiking, camping, and outdoor adventures. Looking for a unique birthday gift.')">🏕️ Outdoor adventure friend</span>
+        <span class="example-chip" onclick="fillExample('My colleague enjoys reading, coffee, and minimalist design. Farewell gift under $50.')">📚 Reading & coffee lover</span>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>🎁 <strong>AI Gift Recommender</strong> | Powered by intelligent keyword analysis & typo detection</p>
+      <p class="mt-2">Uses particle effects for visual appeal | Fully responsive design</p>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: ["#8A2BE2", "#4169E1", "#FF6B8B", "#00C9FF"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 9, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#8A2BE2",
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      },
+      retina_detect: true
+    });
+    
+    // Function to fill textarea with example
+    function fillExample(exampleText) {
+      document.getElementById('userInput').value = exampleText;
+      hideTypoAlert();
+    }
+    
+    // Show typo alert
+    function showTypoAlert(typoWord, suggestedWord) {
+      const typoAlert = document.getElementById('typoAlert');
+      const typoMessage = document.getElementById('typoMessage');
+      const correctTypoBtn = document.getElementById('correctTypo');
+      
+      typoMessage.textContent = `Did you mean "${suggestedWord}" instead of "${typoWord}"?`;
+      typoAlert.style.display = 'block';
+      
+      correctTypoBtn.onclick = function() {
+        const textarea = document.getElementById('userInput');
+        textarea.value = textarea.value.replace(typoWord, suggestedWord);
+        hideTypoAlert();
+      };
+    }
+    
+    function hideTypoAlert() {
+      document.getElementById('typoAlert').style.display = 'none';
+    }
+    
+    // Check for potential typos
+    function checkForTypos(text) {
+      const commonTypos = {
+        'booing': 'books',
+        'boking': 'books',
+        'boking': 'baking',
+        'cooking': 'cooking',
+        'reding': 'reading',
+        'cyclying': 'cycling',
+        'bycicle': 'bicycle',
+        'bycycling': 'cycling',
+        'hicking': 'hiking',
+        'swiming': 'swimming',
+        'dansing': 'dancing',
+        'paiting': 'painting',
+        'photograpy': 'photography'
+      };
+      
+      const words = text.toLowerCase().split(/\s+/);
+      for (const word of words) {
+        if (commonTypos[word]) {
+          return { typo: word, correction: commonTypos[word] };
+        }
+      }
+      return null;
+    }
+    
+    // Main function to send message and get response
+    async function sendMessage() {
+      const input = document.getElementById('userInput').value;
+      const responseDiv = document.getElementById('response');
+      const responseContainer = document.getElementById('responseContainer');
+      const typingIndicator = document.getElementById('typingIndicator');
+      
+      if (!input.trim()) {
+        responseDiv.innerHTML = '<div class="alert alert-warning">Please describe the person or occasion to get gift suggestions.</div>';
+        responseContainer.style.display = 'block';
+        return;
+      }
+      
+      // Check for typos
+      const typoCheck = checkForTypos(input);
+      if (typoCheck) {
+        showTypoAlert(typoCheck.typo, typoCheck.correction);
+      } else {
+        hideTypoAlert();
+      }
+      
+      // Show response container and typing indicator
+      responseContainer.style.display = 'block';
+      typingIndicator.style.display = 'block';
+      responseDiv.innerHTML = '';
+      
+      // Simulate API call with better AI
+      setTimeout(() => {
+        typingIndicator.style.display = 'none';
+        const giftSuggestions = generateImprovedGiftSuggestions(input);
+        responseDiv.innerHTML = giftSuggestions;
+        responseContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 1800);
+    }
+    
+    // Improved function to generate gift suggestions
+    function generateImprovedGiftSuggestions(input) {
+      const lowerInput = input.toLowerCase();
+      const suggestions = [];
+      let detectedTypo = null;
+      
+      // Check for cycling keywords
+      if (lowerInput.includes('cycling') || lowerInput.includes('bike') || lowerInput.includes('bicycle') || lowerInput.includes('cyclist')) {
+        suggestions.push({
+          title: "🚴‍♀️ Cycling & Biking",
+          icon: "fas fa-bicycle",
+          color: "#00C9FF",
+          items: [
+            "High-performance cycling jersey with moisture-wicking technology",
+            "Professional bike maintenance tool kit with portable mini-pump",
+            "Smart bike computer with GPS, heart rate monitor, and route tracking",
+            "Premium cycling sunglasses with interchangeable lenses",
+            "Personalized water bottle with motivational quote"
+          ],
+          budget: "$45 - $200"
+        });
+      }
+      
+      // Check for reading keywords (including corrected "booing" typo)
+      if (lowerInput.includes('book') || lowerInput.includes('read') || lowerInput.includes('booing') || lowerInput.includes('novel') || lowerInput.includes('literature')) {
+        if (lowerInput.includes('booing')) {
+          detectedTypo = "booing → books";
+        }
+        
+        suggestions.push({
+          title: "📚 Books & Reading",
+          icon: "fas fa-book-open",
+          color: "#8A2BE2",
+          items: [
+            "Waterproof e-reader case with built-in reading light",
+            "Annual subscription to audiobook service (Audible, Scribd)",
+            "Personalized leather-bound journal with their name engraved",
+            "Book-themed candle set (scented like 'old library', 'parchment')",
+            "Custom book embosser with monogram or favorite quote"
+          ],
+          budget: "$25 - $150"
+        });
+      }
+      
+      // Check for cooking/baking keywords
+      if (lowerInput.includes('cook') || lowerInput.includes('bake') || lowerInput.includes('recipe') || lowerInput.includes('kitchen')) {
+        suggestions.push({
+          title: "👨‍🍳 Cooking & Baking",
+          icon: "fas fa-utensils",
+          color: "#FF6B8B",
+          items: [
+            "Artisan ceramic baking dish with personalized engraving",
+            "Monthly international spice subscription box",
+            "Precision digital kitchen scale with recipe app connectivity",
+            "Sous vide immersion circulator for restaurant-quality meals",
+            "Personalized apron with fun cooking-themed design"
+          ],
+          budget: "$35 - $180"
+        });
+      }
+      
+      // Check for yoga/fitness keywords
+      if (lowerInput.includes('yoga') || lowerInput.includes('fitness') || lowerInput.includes('workout') || lowerInput.includes('exercise')) {
+        suggestions.push({
+          title: "🧘‍♀️ Yoga & Fitness",
+          icon: "fas fa-spa",
+          color: "#92FE9D",
+          items: [
+            "Eco-friendly cork yoga mat with alignment markers",
+            "Set of resistance bands with carrying case and workout guide",
+            "Smart fitness tracker with sleep monitoring and guided breathing",
+            "Aromatherapy diffuser with calming essential oils set",
+            "Online subscription to yoga/fitness classes (6 months)"
+          ],
+          budget: "$30 - $120"
+        });
+      }
+      
+      // Check for budget constraints
+      let budgetConstraint = "";
+      const budgetMatch = lowerInput.match(/(under|less than|below)\s*\$?(\d+)/);
+      if (budgetMatch) {
+        const budget = parseInt(budgetMatch[2]);
+        budgetConstraint = ` I've focused on gifts under $${budget}.`;
+        
+        // Filter suggestions based on budget
+        for (let i = suggestions.length - 1; i >= 0; i--) {
+          const suggestionBudget = parseInt(suggestions[i].budget.match(/\$(\d+)/)[1]);
+          if (suggestionBudget > budget) {
+            suggestions.splice(i, 1);
+          }
+        }
+      }
+      
+      // Default suggestions if no specific keywords match
+      if (suggestions.length === 0) {
+        suggestions.push({
+          title: "🎁 Thoughtful Gift Ideas",
+          icon: "fas fa-heart",
+          color: "#FFA726",
+          items: [
+            "Custom star map showing the night sky on a special date",
+            "Experience gift: cooking class, concert tickets, or spa day",
+            "Personalized photo album with handwritten notes",
+            "Monthly subscription box tailored to their interests",
+            "High-quality Bluetooth speaker with excellent sound"
+          ],
+          budget: "$30 - $150"
+        });
+      }
+      
+      // Build the HTML response
+      let html = '';
+      
+      if (detectedTypo) {
+        html += `
+          <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> 
+            <strong>Note:</strong> I detected a possible typo (${detectedTypo}) and adjusted recommendations accordingly.
+          </div>
+        `;
+      }
+      
+      html += `<h4 class="mb-4">Based on your description, here are personalized gift ideas${budgetConstraint}:</h4>`;
+      
+      suggestions.forEach(suggestion => {
+        html += `
+          <div class="gift-category" style="border-left-color: ${suggestion.color};">
+            <h5 style="color: ${suggestion.color};">
+              <i class="${suggestion.icon}"></i> ${suggestion.title}
+            </h5>
+            <div>
+              ${suggestion.items.map(item => `
+                <div class="gift-item">
+                  <i class="fas fa-check-circle"></i> ${item}
+                </div>
+              `).join('')}
+            </div>
+            <div class="budget-tag">Budget: ${suggestion.budget}</div>
+          </div>
+        `;
+      });
+      
+      // Add combination gift ideas if multiple categories
+      if (suggestions.length > 1) {
+        html += `
+          <div class="gift-category" style="border-left-color: #8A2BE2; background: linear-gradient(135deg, #f8f9ff, #e8f4f8);">
+            <h5 style="color: #8A2BE2;">
+              <i class="fas fa-lightbulb"></i> Combination Gift Ideas
+            </h5>
+            <p class="mb-3">Combine gifts from different categories for a more personalized present:</p>
+            <div class="gift-item">
+              <i class="fas fa-star"></i> Cycling jersey + audiobook subscription for post-ride relaxation
+            </div>
+            <div class="gift-item">
+              <i class="fas fa-star"></i> Cookbook + kitchen utensils for the culinary enthusiast
+            </div>
+            <div class="gift-item">
+              <i class="fas fa-star"></i> Yoga mat + calming essential oils for complete wellness
+            </div>
+            <div class="budget-tag">Creative combos</div>
+          </div>
+        `;
+      }
+      
+      html += `
+        <div class="mt-4 p-4 border rounded" style="background: linear-gradient(135deg, #f0f7ff, #e6f7ff);">
+          <h5><i class="fas fa-gem"></i> Pro Tip:</h5>
+          <p class="mb-2">The most memorable gifts often combine:</p>
+          <ul class="mb-0">
+            <li><strong>Something they want</strong> (related to their hobbies)</li>
+            <li><strong>Something they need</strong> (practical item they'll use often)</li>
+            <li><strong>Something personal</strong> (customized with their name, date, or inside joke)</li>
+          </ul>
+        </div>
+      `;
+      
+      return html;
+    }
+    
+    // Allow pressing Enter to submit (while allowing Shift+Enter for new lines)
+    document.getElementById('userInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+    
+    // Input validation on blur
+    document.getElementById('userInput').addEventListener('blur', function() {
+      const input = this.value;
+      if (input.trim()) {
+        const typoCheck = checkForTypos(input);
+        if (typoCheck) {
+          showTypoAlert(typoCheck.typo, typoCheck.correction);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
