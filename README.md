@@ -1,185 +1,279 @@
 <div align="center">
-🎁 Gift Recommender AI ChatBot
-AI that understands people, not just keywords
 
-An intelligent AI-powered gift recommendation system that analyzes human descriptions, corrects typing mistakes, understands intent + budget, and delivers personalized gift ideas through a visually rich and interactive interface.
+# 🎁 Gift Recommender AI ChatBot
 
-<br/>
+**AI-powered gift recommendation system with smart typo correction, budget awareness, and modern interactive interface**
 
-
-
-
-
-
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Shivang-Chaurasia/gift-recommender-ai/pulls)
+[![Open in Visual Studio Code](https://img.shields.io/badge/Open%20in-VSCode-blue?logo=visualstudiocode)](https://github.dev/Shivang-Chaurasia/gift-recommender-ai)
 
 </div>
-🌟 Why This Project Exists
 
-Choosing a gift is emotional, contextual, and often confusing.
-This project bridges the gap between human intent and meaningful suggestions using AI-powered understanding and smart text processing.
+---
 
-Instead of rigid filters, the system understands:
+## 📋 Table of Contents
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [🖼️ Screenshots](#️-screenshots)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📁 Project Structure](#-project-structure)
+- [🎮 How to Use](#-how-to-use)
+- [🔧 API Reference](#-api-reference)
+- [🔮 Future Roadmap](#-future-roadmap)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [🙏 Acknowledgments](#-acknowledgments)
 
-Interests
+---
 
-Relationships
+## ✨ Features
 
-Occasions
+### 🎯 **Core Functionality**
+- **AI-Driven Recommendations** – Generate personalized gift ideas from natural language descriptions
+- **Smart Typo Detection** – Automatically corrects common typing mistakes (e.g., "booing" → "books")
+- **Budget-Aware Filtering** – Understands and respects budget constraints mentioned in queries
+- **Real-Time Processing** – Instant suggestions with animated typing indicators
 
-Budget constraints
+### 🎨 **User Experience**
+- **Modern Gradient UI** – Eye-catching color schemes with smooth animations
+- **Interactive Particle Background** – Dynamic visual effects using Particles.js
+- **Responsive Design** – Seamless experience across desktop, tablet, and mobile
+- **Example Prompts** – One-click template inputs for quick testing
 
-Even typing mistakes
+### ⚡ **Technical Excellence**
+- **Client-Side Processing** – Fast response times without server latency
+- **Modular Codebase** – Clean, maintainable JavaScript architecture
+- **Cross-Browser Compatibility** – Works on all modern browsers
 
-✨ Core Capabilities
-🤖 AI-Powered Personalization
+---
 
-Generates thoughtful, relevant gift ideas by interpreting natural language descriptions rather than fixed inputs.
+## 🚀 Quick Start
 
-🔍 Intelligent Typo Detection
+### Prerequisites
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
 
-Automatically corrects common and contextual typing errors
-(e.g., “booing” → “books”, “camra” → “camera”).
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/Shivang-Chaurasia/gift-recommender-ai.git
 
-🎯 Budget-Aware Reasoning
-
-Understands budget constraints and filters recommendations accordingly.
-
-⚡ Real-Time Interactive Experience
-
-Instant suggestions with typing animations for a conversational feel.
-
-🎨 Premium UI Experience
-
-Modern gradient-based design
-
-Particle animation background
-
-Clean typography & spacing
-
-📱 Fully Responsive
-
-Seamless experience across desktop, tablet, and mobile devices.
-
-📋 Example Prompt Templates
-
-One-click examples for instant testing and demos.
-
-🖼️ Interface Preview
-<p align="center"> <img src="https://via.placeholder.com/900x500/8A2BE2/FFFFFF?text=Gift+Recommender+AI+Interface" width="80%"> </p> <p align="center"> <img src="https://via.placeholder.com/400x700/4169E1/FFFFFF?text=Mobile+Responsive+View" width="35%"> </p>
-🛠️ Technology Stack
-Frontend
-
-HTML5
-
-CSS3 (advanced gradients & animations)
-
-JavaScript (ES6+)
-
-Bootstrap 4.5.2
-
-Font Awesome 6.4.0
-
-Particles.js
-
-Backend
-
-Node.js
-
-Express.js
-
-(Extensible for AI/ML APIs)
-
-🚀 Getting Started
-🔧 Prerequisites
-
-Node.js (v14+)
-
-npm or yarn
-
-📦 Installation
-git clone https://github.com/yourusername/gift-recommender-ai.git
+# Navigate to project directory
 cd gift-recommender-ai
+
+# Install dependencies
 npm install
+
+# Start the development server
 npm start
+Access the Application
+Open your browser and navigate to:
 
-
-Visit:
-
+text
 http://localhost:3000
+🖼️ Screenshots
+Desktop View	Mobile View
+https://via.placeholder.com/800x450/8A2BE2/FFFFFF?text=Desktop+View	https://via.placeholder.com/400x700/4169E1/FFFFFF?text=Mobile+View
+Interactive Demo: Try typing examples like:
 
-🎮 How It Works (Flow)
+"My sister loves cycling and reading books"
 
-1️⃣ User describes the recipient in natural language
-2️⃣ System cleans & corrects the text
-3️⃣ AI processes interests, intent & budget
-4️⃣ Categorized gift suggestions are generated
-5️⃣ Results are displayed in real time
+"Boyfriend who enjoys tech and gaming"
 
-Example Input
+"Mom who loves cooking and gardening"
 
-"My sister loves cycling, yoga and reading books. Budget under $100."
+🛠️ Tech Stack
+Frontend Layer
+Technology	Purpose	Version
+HTML5	Markup structure	Latest
+CSS3	Styling & animations	Latest
+JavaScript	Core logic & interactivity	ES6+
+Bootstrap	Responsive framework	4.5.2
+Font Awesome	Icon library	6.4.0
+Particles.js	Background animations	2.0.0
+Backend Layer
+Technology	Purpose	Version
+Node.js	Runtime environment	14+
+Express.js	Web server framework	4.x
+Development Tools
+Git – Version control
 
-🌐 API Design (Expandable)
+npm – Package management
+
+VS Code – Recommended editor
+
+📁 Project Structure
+text
+gift-recommender-ai/
+│
+├── Asset/
+│   └── icon.png              # Application icon
+│
+├── index.html                # Main HTML file
+├── server.js                 # Node.js server
+├── package.json              # Dependencies
+├── package-lock.json         # Lock file
+├── .env                      # Environment variables
+├── .gitignore               # Git ignore rules
+└── README.md                # Documentation (this file)
+🎮 How to Use
+1. Describe the Recipient
+Enter details in the text area:
+
+text
+Example: "My friend loves hiking, photography, and coffee. Looking for a birthday gift under $80."
+2. Get Recommendations
+Click the "Get Smart Recommendations" button or press Enter.
+
+3. Review Suggestions
+View categorized gift ideas with:
+
+📝 Specific gift items
+
+💰 Budget ranges
+
+🎯 Personalized recommendations
+
+4. Try Examples
+Click on example chips for instant testing:
+
+🚴‍♀️ "Sister who loves cycling"
+
+👩‍🍳 "Mom who loves cooking"
+
+🎮 "Tech enthusiast boyfriend"
+
+🔧 API Reference
+Local Endpoint
+text
 POST /api/recommend
+Request Body:
+
+json
 {
-  "description": "Friend loves hiking and photography",
+  "description": "Person description text",
   "budget": 100,
   "occasion": "birthday"
 }
+Response:
 
+json
 {
   "success": true,
   "suggestions": [
     {
-      "category": "Outdoor & Adventure",
-      "items": ["Hiking backpack", "Portable water filter"],
-      "budget_range": "$50 - $120"
+      "category": "Cycling & Fitness",
+      "items": ["Premium cycling jersey", "Smart bike computer"],
+      "budget_range": "$45-$200"
     }
   ]
 }
+🔮 Future Roadmap
+🚀 Planned Features
+Advanced AI Integration – Connect to GPT/LLM APIs
 
-🏗️ Project Structure
-gift-recommender-ai/
-├── Asset/
-│   └── icon.png
-├── index.html
-├── server.js
-├── package.json
-├── .env
-└── README.md
+User Accounts – Save preferences and history
 
-🔮 Roadmap & Enhancements
+Multi-language Support – Internationalization
 
-🔐 User accounts & saved preferences
+Gift Comparison – Price and feature comparisons
 
-🎁 Occasion-based AI tuning
+Wishlist Integration – Connect with Amazon/other retailers
 
-🧠 Advanced LLM integration
+Mobile App – React Native/iOS/Android versions
 
-☁️ Cloud deployment
+🔧 Technical Improvements
+Database Integration – MongoDB/PostgreSQL for user data
 
-📊 Analytics dashboard
+Authentication – OAuth/JWT implementation
+
+Testing Suite – Unit and integration tests
+
+CI/CD Pipeline – Automated deployment
+
+Performance Optimization – Caching and load balancing
 
 🤝 Contributing
+We welcome contributions! Here's how you can help:
 
-Contributions are welcome and appreciated.
+Ways to Contribute
+Report Bugs – Open an issue with detailed reproduction steps
 
-git checkout -b feature/your-feature
+Suggest Features – Share your ideas for improvement
+
+Submit Pull Requests – Fix bugs or add features
+
+Improve Documentation – Help others understand the project
+
+Development Process
+bash
+# 1. Fork the repository
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/gift-recommender-ai.git
+
+# 3. Create a feature branch
+git checkout -b feature/amazing-feature
+
+# 4. Make your changes
+# 5. Commit with descriptive message
 git commit -m "Add amazing feature"
-git push origin feature/your-feature
 
+# 6. Push to your fork
+git push origin feature/amazing-feature
 
-Open a Pull Request 🚀
+# 7. Open a Pull Request
+Code Guidelines
+Follow existing code style
 
-📝 License
+Add comments for complex logic
 
-Licensed under the MIT License.
+Update documentation as needed
+
+Test your changes thoroughly
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for full details.
+
+text
+MIT License
+
+Copyright (c) 2024 Shivang Chaurasia
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+🙏 Acknowledgments
+Technologies & Libraries
+Bootstrap – CSS framework
+
+Font Awesome – Icon library
+
+Particles.js – Background effects
+
+Node.js – Runtime environment
+
+Express.js – Web framework
+
+Inspiration
+Inspired by the challenge of finding perfect gifts
+
+Designed to solve real-world gift-giving problems
+
+Built with user experience as the top priority
 
 <div align="center">
-❤️ Built with passion by Shivang Chaurasia
+👨‍💻 Created by Shivang Chaurasia
+https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=About.me&logoColor=white
 
-<a href="https://github.com/yourusername">GitHub</a> •
-<a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+⭐ Star this repo if you find it useful!
 
-</div>
+</div> ```
