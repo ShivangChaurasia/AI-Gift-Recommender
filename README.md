@@ -91,8 +91,9 @@ Git – Version control
 npm – Package management
 
 VS Code – Recommended editor
-
-📁 Project Structure
+```
+## 📁 Project Structure
+```
 text
 gift-recommender-ai/
 │
@@ -106,34 +107,31 @@ gift-recommender-ai/
 ├── .env                      # Environment variables
 ├── .gitignore               # Git ignore rules
 └── README.md                # Documentation (this file)
-🎮 How to Use
+```
+## 🎮 How to Use
 1. Describe the Recipient
 Enter details in the text area:
-
-text
 Example: "My friend loves hiking, photography, and coffee. Looking for a birthday gift under $80."
+
+
 2. Get Recommendations
 Click the "Get Smart Recommendations" button or press Enter.
 
 3. Review Suggestions
 View categorized gift ideas with:
-
 📝 Specific gift items
-
 💰 Budget ranges
-
 🎯 Personalized recommendations
 
 4. Try Examples
 Click on example chips for instant testing:
-
 🚴‍♀️ "Sister who loves cycling"
-
 👩‍🍳 "Mom who loves cooking"
-
 🎮 "Tech enthusiast boyfriend"
 
-🔧 API Reference
+
+---
+## 🔧 API Reference
 Local Endpoint
 text
 POST /api/recommend
@@ -158,45 +156,37 @@ json
     }
   ]
 }
-🔮 Future Roadmap
-🚀 Planned Features
+
+---
+## 🔮 Future Roadmap
+# 🚀 Planned Features
 Advanced AI Integration – Connect to GPT/LLM APIs
-
 User Accounts – Save preferences and history
-
 Multi-language Support – Internationalization
-
 Gift Comparison – Price and feature comparisons
-
 Wishlist Integration – Connect with Amazon/other retailers
-
 Mobile App – React Native/iOS/Android versions
-
-🔧 Technical Improvements
+---
+## 🔧 Technical Improvements
 Database Integration – MongoDB/PostgreSQL for user data
-
 Authentication – OAuth/JWT implementation
-
 Testing Suite – Unit and integration tests
-
 CI/CD Pipeline – Automated deployment
-
 Performance Optimization – Caching and load balancing
 
-🤝 Contributing
-We welcome contributions! Here's how you can help:
 
+---
+## 🤝 Contributing
+We welcome contributions! Here's how you can help:
 Ways to Contribute
 Report Bugs – Open an issue with detailed reproduction steps
-
 Suggest Features – Share your ideas for improvement
-
 Submit Pull Requests – Fix bugs or add features
-
 Improve Documentation – Help others understand the project
 
-Development Process
-bash
+---
+## Development Process
+```bash
 # 1. Fork the repository
 # 2. Clone your fork
 git clone https://github.com/YOUR_USERNAME/gift-recommender-ai.git
@@ -212,22 +202,19 @@ git commit -m "Add amazing feature"
 git push origin feature/amazing-feature
 
 # 7. Open a Pull Request
-Code Guidelines
+```
+---
+## Code Guidelines
 Follow existing code style
-
-Add comments for complex logic
-
+Add Comments for complex logic
 Update documentation as needed
-
 Test your changes thoroughly
 
-📄 License
+---
+## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for full details.
-
-text
 MIT License
-
-Copyright (c) 2024 Shivang Chaurasia
+Copyright (c) 2025 Shivang Chaurasia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -238,31 +225,28 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+---
+
 🙏 Acknowledgments
 Technologies & Libraries
 Bootstrap – CSS framework
-
 Font Awesome – Icon library
-
 Particles.js – Background effects
-
 Node.js – Runtime environment
-
 Express.js – Web framework
-
-Inspiration
+---
+## Inspiration
 Inspired by the challenge of finding perfect gifts
-
 Designed to solve real-world gift-giving problems
-
 Built with user experience as the top priority
-
+---
 <div align="center">
 👨‍💻 Created by Shivang Chaurasia
 https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
 https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=About.me&logoColor=white
 
-⭐ Star this repo if you find it useful!
+## ⭐ Star this repo if you find it useful!
 
 </div> ```
