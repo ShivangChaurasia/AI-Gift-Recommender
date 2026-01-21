@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@openrouter/sdk": "^0.3.15",
     "axios": "^1.8.4"
   }
 }
