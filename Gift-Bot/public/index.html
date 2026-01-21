@@ -697,6 +697,11 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: input })
         });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(`API error: ${res.status} - ${errorText}`);
+        }
       
         const data = await res.json();
       

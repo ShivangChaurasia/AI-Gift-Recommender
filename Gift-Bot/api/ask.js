@@ -38,9 +38,16 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ reply: botReply });
   } catch (error) {
-    console.error(
-      error.response?.data || error.message
-    );
-    return res.status(500).json({ reply: "Error getting response." });
-  }
+      console.error(
+        "OpenRouter Error:",
+        error.response?.status,
+        error.response?.data || error.message
+      );
+    
+      return res.status(500).json({
+        reply: null,
+        error: error.response?.data || error.message
+      });
+    }
+
 }
