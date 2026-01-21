@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "openai/gpt-3.5-turbo",
+        model: "openai/gpt-5.2",
         messages: [
           {
             role: "user",
@@ -26,16 +26,21 @@ export default async function handler(req, res) {
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://your-site-url.com", // optional but recommended
+          "X-Title": "Gift Suggestion App" // optional but recommended
         }
       }
     );
 
-    const botReply = response.data.choices[0].message.content;
+    const botReply =
+      response.data?.choices?.[0]?.message?.content || "No response";
 
     return res.status(200).json({ reply: botReply });
   } catch (error) {
-    console.error(error.response?.data || error.message);
+    console.error(
+      error.response?.data || error.message
+    );
     return res.status(500).json({ reply: "Error getting response." });
   }
 }
